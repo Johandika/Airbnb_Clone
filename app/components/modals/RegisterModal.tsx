@@ -13,9 +13,11 @@ import Modal from "./Modal";
 import Heading from "../Heading";
 import Input from "../inputs/Input";
 import Button from "../Button";
+import useLoginModal from "@/app/hooks/useLoginModal";
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -29,6 +31,11 @@ const RegisterModal = () => {
       password: "",
     },
   });
+
+  const toggle = useCallback(() => {
+    registerModal.onClose();
+    loginModal.onOpen();
+  }, [registerModal, loginModal]);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
@@ -99,7 +106,7 @@ const RegisterModal = () => {
         <div className="text-neutral-500">Already have account?</div>
         <div
           className="text-neutral-800 cursor-pointer hover:underline"
-          onClick={registerModal.onClose}
+          onClick={toggle}
         >
           Log in
         </div>

@@ -1,3 +1,5 @@
+"use client";
+
 import { IconType } from "react-icons";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
@@ -16,8 +18,6 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
 }) => {
   const router = useRouter();
   const params = useSearchParams(); // akses ke query parameter
-  console.log("router");
-  console.log(router);
 
   const handleClick = useCallback(() => {
     let currentQuery = {};
