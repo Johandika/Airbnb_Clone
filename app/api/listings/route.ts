@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import prisma from "@/app/libs/prismadb";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 
-export async function POST(request: Request) {
+export default async function POST(request: Request) {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
@@ -23,6 +23,7 @@ export async function POST(request: Request) {
     price,
   } = body;
 
+  // Untuk mengecek apakah setiap key dari body memiliki value, jika ada yg tidak memiliki value maka tampil error
   Object.keys(body).forEach((value: any) => {
     if (!body[value]) {
       NextResponse.error();
